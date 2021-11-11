@@ -9,3 +9,6 @@ Equipo:
   / Javier Navarro - Modelado
   
   Pese a ello todos tendremos función algo polivalente a la hora de realizar el proyecto.
+
+Enlace a carpeta compartida: 
+https://drive.google.com/drive/folders/1nbyXaxnKdTseN65ULwndUqnUvPqiwC1m?usp=sharing
