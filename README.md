@@ -12,3 +12,6 @@ Equipo:
 
 Enlace a carpeta compartida: 
 https://drive.google.com/drive/folders/1nbyXaxnKdTseN65ULwndUqnUvPqiwC1m?usp=sharing
+
+
+https://docs.google.com/presentation/d/13FQfz3wB197PZos9DaOxJYE_Xhdl8DF7f09G6JpYbvA/edit#slide=id.gdd360a504b_0_14
