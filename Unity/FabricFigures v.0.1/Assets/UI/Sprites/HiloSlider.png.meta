@@ -1,0 +1,729 @@
+fileFormatVersion: 2
+guid: 0555e26e7c82c7d4aa390f5259facf6d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 9202245543755043555
+    second: HiloSlider_0
+  - first:
+      213: -8759539427053674452
+    second: HiloSlider_1
+  - first:
+      213: -8474020801416731885
+    second: HiloSlider_2
+  - first:
+      213: 5619328752705413410
+    second: HiloSlider_3
+  - first:
+      213: 6749744880885422070
+    second: HiloSlider_4
+  - first:
+      213: -7746716471349426838
+    second: HiloSlider_5
+  - first:
+      213: -5565163019992705470
+    second: HiloSlider_6
+  - first:
+      213: 6436283150730096033
+    second: HiloSlider_7
+  - first:
+      213: 5171375134983925692
+    second: HiloSlider_8
+  - first:
+      213: 5587591823530978370
+    second: HiloSlider_9
+  - first:
+      213: -4760012675673276533
+    second: HiloSlider_10
+  - first:
+      213: 4656797432293966979
+    second: HiloSlider_11
+  - first:
+      213: 7655132869994331913
+    second: HiloSlider_12
+  - first:
+      213: -8261009657984089326
+    second: HiloSlider_13
+  - first:
+      213: 6680006709515396087
+    second: HiloSlider_14
+  - first:
+      213: 2006483115726583227
+    second: HiloSlider_15
+  - first:
+      213: 6131503060500049926
+    second: HiloSlider_16
+  - first:
+      213: 3090658078356231569
+    second: HiloSlider_17
+  - first:
+      213: -3206839029157726465
+    second: HiloSlider_18
+  - first:
+      213: -5401143814319056558
+    second: HiloSlider_19
+  - first:
+      213: -6074696913677809983
+    second: HiloSlider_20
+  - first:
+      213: 5253223718239034026
+    second: HiloSlider_21
+  - first:
+      213: -326999075807486839
+    second: HiloSlider_22
+  - first:
+      213: 4283630119976728532
+    second: HiloSlider_23
+  - first:
+      213: -7693453897192160852
+    second: HiloSlider_25
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: HiloSlider_0
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 1045
+        width: 225
+        height: 34
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e2d0730191f4bf70800000000000000
+      internalID: 9202245543755043555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HiloSlider_1
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 1045
+        width: 225
+        height: 34
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c20ef661d4ddf6680800000000000000
+      internalID: -8759539427053674452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HiloSlider_2
+      rect:
+        serializedVersion: 2
+        x: 478
+        y: 1043
+        width: 225
+        height: 34
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 313e8487afa366a80800000000000000
+      internalID: -8474020801416731885
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HiloSlider_3
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 1044
+        width: 225
+        height: 34
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22125256abddbfd40800000000000000
+      internalID: 5619328752705413410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HiloSlider_4
+      rect:
+        serializedVersion: 2
+        x: 950
+        y: 1045
+        width: 225
+        height: 34
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f7dfad1539ebad50800000000000000
+      internalID: 6749744880885422070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HiloSlider_5
+      rect:
+        serializedVersion: 2
+        x: 1191
+        y: 1045
+        width: 225
+        height: 34
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a65cc85c9622e7490800000000000000
+      internalID: -7746716471349426838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HiloSlider_6
+      rect:
+        serializedVersion: 2
+        x: 1423
+        y: 1045
+        width: 225
+        height: 34
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 246d13408b194c2b0800000000000000
+      internalID: -5565163019992705470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HiloSlider_7
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 808
+        width: 225
+        height: 34
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ad6919bc65425950800000000000000
+      internalID: 6436283150730096033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HiloSlider_8
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 808
+        width: 225
+        height: 34
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbf2101494a64c740800000000000000
+      internalID: 5171375134983925692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HiloSlider_9
+      rect:
+        serializedVersion: 2
+        x: 478
+        y: 808
+        width: 225
+        height: 34
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24ce07fb82d1b8d40800000000000000
+      internalID: 5587591823530978370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HiloSlider_10
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 808
+        width: 225
+        height: 34
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8f332ce0b901fdb0800000000000000
+      internalID: -4760012675673276533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HiloSlider_11
+      rect:
+        serializedVersion: 2
+        x: 950
+        y: 808
+        width: 225
+        height: 34
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38445d6879440a040800000000000000
+      internalID: 4656797432293966979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HiloSlider_12
+      rect:
+        serializedVersion: 2
+        x: 1191
+        y: 808
+        width: 225
+        height: 34
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90fbd6069ce7c3a60800000000000000
+      internalID: 7655132869994331913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HiloSlider_13
+      rect:
+        serializedVersion: 2
+        x: 1423
+        y: 808
+        width: 225
+        height: 34
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21389c91c7ffa5d80800000000000000
+      internalID: -8261009657984089326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HiloSlider_14
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 572
+        width: 225
+        height: 34
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f324e9c5b624bc50800000000000000
+      internalID: 6680006709515396087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HiloSlider_15
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 572
+        width: 225
+        height: 34
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb5b3b053c578db10800000000000000
+      internalID: 2006483115726583227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HiloSlider_16
+      rect:
+        serializedVersion: 2
+        x: 478
+        y: 572
+        width: 225
+        height: 34
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60073542c89771550800000000000000
+      internalID: 6131503060500049926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HiloSlider_17
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 572
+        width: 225
+        height: 34
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1955d92b52934ea20800000000000000
+      internalID: 3090658078356231569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HiloSlider_18
+      rect:
+        serializedVersion: 2
+        x: 950
+        y: 572
+        width: 225
+        height: 34
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff6f13fb4e40f73d0800000000000000
+      internalID: -3206839029157726465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HiloSlider_19
+      rect:
+        serializedVersion: 2
+        x: 1191
+        y: 572
+        width: 225
+        height: 34
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 259d6be31584b05b0800000000000000
+      internalID: -5401143814319056558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HiloSlider_20
+      rect:
+        serializedVersion: 2
+        x: 1423
+        y: 572
+        width: 225
+        height: 34
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c68216975752bba0800000000000000
+      internalID: -6074696913677809983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HiloSlider_21
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 337
+        width: 225
+        height: 34
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aaa5b43932337e840800000000000000
+      internalID: 5253223718239034026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HiloSlider_22
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 337
+        width: 225
+        height: 34
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98c1d94b214467bf0800000000000000
+      internalID: -326999075807486839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HiloSlider_23
+      rect:
+        serializedVersion: 2
+        x: 478
+        y: 337
+        width: 225
+        height: 34
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d7706206e2827b30800000000000000
+      internalID: 4283630119976728532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HiloSlider_24
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 337
+        width: 225
+        height: 34
+      alignment: 4
+      pivot: {x: 0, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 928aa83fc58a06ad0800000000000000
+      internalID: -2710981858500630487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HiloSlider_25
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 336
+        width: 225
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ca14402317c5b3590800000000000000
+      internalID: -7693453897192160852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: a17b2ae06dc113b49b968b4d62f42721
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
