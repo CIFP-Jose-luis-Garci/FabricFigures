@@ -1,0 +1,1 @@
+Suena tras clickear en un boton, al hacer el cambio de escena de menu.

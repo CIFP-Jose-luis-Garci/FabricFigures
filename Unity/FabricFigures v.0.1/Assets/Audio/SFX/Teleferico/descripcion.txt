@@ -1,0 +1,3 @@
+El audio mecanismo_teleferico.mp3 se aplica al insertar la moneda, cuando el teleferico se activa. Es un sonido producido al moverse los engranajes.
+El audio puerta_abierta_teleferico.mp3 se aplica cuando se abren sus puertas.
+El audio teleferico_movimiento_parada.mp3 se aplica desde que el teleferico comienza a moverse hasta que se para. Es un sonido producido al avanzar y al frenar.
