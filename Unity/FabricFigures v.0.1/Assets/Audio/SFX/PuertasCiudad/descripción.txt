@@ -1,0 +1,1 @@
+El audio porton_abierto.mp3 se aplica tras el dialogo de Nuts, cuando las puertas de la ciudad se abren.

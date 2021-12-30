@@ -1,0 +1,2 @@
+El audio bebe_alerta.mp3 se aplica cuando este enemigo esta cerca y es una llamada para el resto de enemigos.
+El audio bebe_dañado.mp3 se aplica cada vez que atacas a este enemigo, haciendo que suelte el dinero u objetos que lleva consigo y te ha robado.

@@ -1,0 +1,4 @@
+El audio lamentos_normal.mp3 se aplica cuando un enemigo normal esta en escena. Son lamentos ahogados.
+El audio hit_normal.mp3 y hit_normal_2.mp3 se aplican cuando un enemigo normal ataca. Es un ruido humedo, ya que el enemigo parece estar derritiendose.
+El audio impact_normal.mp3 se aplica cuando un enemigo normal es golpeado.
+El audio death_normal.mp3 se aplica cuando un enemigo normal muere.
