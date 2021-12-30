@@ -1,0 +1,4 @@
+El audio lamentos_conejo.mp3 se aplica cuando el enemigo conejo esta en la escena. Es un sonido de desgarro y de manecillas de reloj.
+Los audios hit_conejo.mp3 y hit_conejo_2.mp3 se aplican cuando el enemigo conejo atacan. Reproducen el sonido del brazo latigo.
+El audio impact_conejo.mp3 se apica cuando un enemigo conejo es golpeado.
+El audio death_conejo.mp3 se aplica cuando un enemigo conejo muere.
