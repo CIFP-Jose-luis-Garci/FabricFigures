@@ -1,0 +1,4 @@
+El audio lamento_boss.mp3 se aplica cuando el boss esta en la escena. Son multiples voces y rugidos.
+Los audios hit_boss.mp3 y hit_boss_2.mp3 se aplican cuando el boss ataca. Reproducen el sonido de un puñetazo y un zarpazo.
+El audio impact_boss.mp3 se aplica cuando el boss es golpeado. 
+El audio death_boss.mp3 se aplica cuando el boss muere.

@@ -1,0 +1,5 @@
+El audio lamentos_oso.mp3 se aplica cuando el enemigo oso esta en la escena. Es un sonido de suplica.
+Los audios hit_oso.mp3 y hit_oso_2.mp3 se aplican cuando el enemigo oso ataca. Repoducen el sonido de un puñetazo.
+El audio impact_oso.mp3 se aplica cuando un enemigo oso es golpeado.
+El audio death_oso.mp3 se aplica cuando un enemigo oso muere.
+
