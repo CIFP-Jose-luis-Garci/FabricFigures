@@ -7,10 +7,28 @@ TextureImporter:
     second: Btn_0
   - first:
       213: 7671702773606796925
-    second: Btn_1
+    second: BtnE_0
   - first:
       213: -1105071169937095710
     second: SliderBg
+  - first:
+      213: 6677768174356087247
+    second: Btn_01
+  - first:
+      213: 5159173024077760679
+    second: Btn_02
+  - first:
+      213: -3851227085212677614
+    second: Btn_03
+  - first:
+      213: -4093694697716946851
+    second: BtnE_01
+  - first:
+      213: 2288971964370195461
+    second: BtnE_02
+  - first:
+      213: -958166963332529782
+    second: BtnE_03
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -105,10 +123,10 @@ TextureImporter:
         serializedVersion: 2
         x: 309
         y: 915
-        width: 51
+        width: 427
         height: 49
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -116,27 +134,6 @@ TextureImporter:
       bones: []
       spriteID: 0a93f9cdc9f22e760800000000000000
       internalID: 7485597881406011808
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Btn_1
-      rect:
-        serializedVersion: 2
-        x: 685
-        y: 915
-        width: 51
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d7e4633b60d577a60800000000000000
-      internalID: 7671702773606796925
       vertices: []
       indices: 
       edges: []
@@ -150,7 +147,7 @@ TextureImporter:
         width: 246
         height: 21
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -158,6 +155,153 @@ TextureImporter:
       bones: []
       spriteID: 2e3cf5830aff9a0f0800000000000000
       internalID: -1105071169937095710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BtnE_0
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 994
+        width: 427
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7e4633b60d577a60800000000000000
+      internalID: 7671702773606796925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Btn_01
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 758
+        width: 321
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc147e436c23cac50800000000000000
+      internalID: 6677768174356087247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Btn_02
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 612
+        width: 247
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a8ceeae780199740800000000000000
+      internalID: 5159173024077760679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Btn_03
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 466
+        width: 223
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21a0984ee51bd8ac0800000000000000
+      internalID: -3851227085212677614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BtnE_01
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 826
+        width: 321
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d586eab9c564037c0800000000000000
+      internalID: -4093694697716946851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BtnE_02
+      rect:
+        serializedVersion: 2
+        x: 399
+        y: 675
+        width: 247
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5041d15cfdf04cf10800000000000000
+      internalID: 2288971964370195461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BtnE_03
+      rect:
+        serializedVersion: 2
+        x: 409
+        y: 531
+        width: 223
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a81cc033938e3b2f0800000000000000
+      internalID: -958166963332529782
       vertices: []
       indices: 
       edges: []
