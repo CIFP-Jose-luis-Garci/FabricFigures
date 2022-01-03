@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menus/Extras.unity
     guid: 04c6352907e8f754390fb499d606886a
+  - enabled: 1
+    path: Assets/Scenes/Menus/Audio.unity
+    guid: 6a885cbabed56b547953025ff53d0733
+  - enabled: 1
+    path: Assets/Scenes/Menus/Controles.unity
+    guid: 98448b933f7ae2a448b80849f49aac15
   m_configObjects: {}

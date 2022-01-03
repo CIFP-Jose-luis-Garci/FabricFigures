@@ -10,4 +10,7 @@ public class MenuScript : MonoBehaviour
         SceneManager.LoadScene(escena);
 
     }
+
+    
+
 }
