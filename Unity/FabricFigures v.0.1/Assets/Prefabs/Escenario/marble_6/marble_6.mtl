@@ -1,0 +1,33 @@
+
+newmtl StandardFAFFFB41
+Kd  0.9803922 01 0.9843139
+Ks  00 00 00
+Ka  00 00 00
+d  0.25490198
+Ns  00
+illum 2
+
+
+
+
+newmtl Standard463FFF
+Kd  0.2745098 0.24705882 01
+Ks  00 00 00
+Ka  00 00 00
+d  01
+Ns  00
+illum 2
+
+
+
+
+newmtl StandardFFFFFF
+Kd  01 01 01
+Ks  00 00 00
+Ka  00 00 00
+d  01
+Ns  00
+illum 2
+
+
+
