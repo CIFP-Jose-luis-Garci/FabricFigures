@@ -351,7 +351,7 @@ MonoBehaviour:
   m_SpriteState:
     m_HighlightedSprite: {fileID: 5159173024077760679, guid: 0265591e87f88fd4c9afba98da21f0ca, type: 3}
     m_PressedSprite: {fileID: 5159173024077760679, guid: 0265591e87f88fd4c9afba98da21f0ca, type: 3}
-    m_SelectedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 5159173024077760679, guid: 0265591e87f88fd4c9afba98da21f0ca, type: 3}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
@@ -576,6 +576,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1eb5ac9e9fd0d24c80d3028f66ba1bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeSlider: {fileID: 0}
+  musicSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
+  masterMixer: {fileID: 0}
+  volumeText: {fileID: 0}
+  musicText: {fileID: 0}
+  sfxText: {fileID: 0}
 --- !u!1 &187012481
 GameObject:
   m_ObjectHideFlags: 0
