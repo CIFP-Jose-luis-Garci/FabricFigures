@@ -29,9 +29,9 @@ public class MenuScript : MonoBehaviour
         musicSlider.value = GameManager.musicVolumen;
         volumeSlider.value = GameManager.volumeVolumen;
 
-        musicText.text = musicSlider.value.ToString();
+        /*musicText.text = musicSlider.value.ToString();
         sfxText.text = sfxSlider.value.ToString();
-        volumeText.text = volumeSlider.value.ToString();
+        volumeText.text = volumeSlider.value.ToString();*/
 
     }
 
@@ -41,15 +41,6 @@ public class MenuScript : MonoBehaviour
     }
 
 
-    public void SetSfxLvl(float sfxVol)
-    {
-
-        masterMixer.SetFloat("sfxVol", sfxVol);
-        PlayerPrefs.SetFloat("sfxVol", sfxVol);
-        GameManager.sfxVolumen = PlayerPrefs.GetFloat("sfxVol");
-
-    }
-
     public void SetMusicLvl(float musicVol)
     {
         masterMixer.SetFloat("musicVol", musicVol);
@@ -57,6 +48,15 @@ public class MenuScript : MonoBehaviour
         PlayerPrefs.SetFloat("musicVol", musicVol);
         GameManager.musicVolumen = PlayerPrefs.GetFloat("musicVol");
 
+
+    }
+
+    public void SetSfxLvl(float sfxVol)
+    {
+
+        masterMixer.SetFloat("sfxVol", sfxVol);
+        PlayerPrefs.SetFloat("sfxVol", sfxVol);
+        GameManager.sfxVolumen = PlayerPrefs.GetFloat("sfxVol");
 
     }
 
@@ -93,6 +93,11 @@ public class MenuScript : MonoBehaviour
 
     }
 
-    
+    public void ExitGame()
+    {
+
+        Application.Quit();
+
+    }
 
 }
