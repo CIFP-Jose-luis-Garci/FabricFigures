@@ -8,4 +8,8 @@ public class GameManager : MonoBehaviour
     public static float musicVolumen;
     public static float sfxVolumen;
     public static float volumeVolumen;
+
+
+    
+
 }

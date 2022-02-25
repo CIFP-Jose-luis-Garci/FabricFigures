@@ -39,7 +39,7 @@ public class MenuScript : MonoBehaviour
 
     private void Update()
     {
-        HudText();
+        
     }
 
 
@@ -94,16 +94,7 @@ public class MenuScript : MonoBehaviour
        reset = true;
     }
 
-    public void HudText()
-    {
-        
-        musicText.text = musicSlider.value.ToString();
-        sfxText.text = sfxSlider.value.ToString();
-        volumeText.text = volumeSlider.value.ToString();
-
-
-
-    }
+    
 
     
 
