@@ -732,7 +732,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 860324091}
-  m_LocalRotation: {x: 0.16976064, y: 0.00016411001, z: -0.000028269746, w: 0.9854853}
+  m_LocalRotation: {x: 0.16976064, y: 0.00016412696, z: -0.000028272669, w: 0.9854853}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -806,7 +806,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1027320099}
-  m_LocalRotation: {x: 0.18761085, y: 0.00016357859, z: -0.0000312439, w: 0.9822434}
+  m_LocalRotation: {x: 0.18761085, y: 0.0001635786, z: -0.000031243904, w: 0.9822434}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -851,7 +851,7 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 605151242}
+  m_LookAt: {fileID: 0}
   m_Follow: {fileID: 605151242}
   m_CommonLens: 1
   m_Lens:
@@ -1073,7 +1073,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1374726237}
-  m_LocalRotation: {x: 0.1911831, y: 0.00016346935, z: -0.000031838445, w: 0.98155445}
+  m_LocalRotation: {x: 0.19118308, y: 0.00016346386, z: -0.00003183881, w: 0.9815544}
   m_LocalPosition: {x: -0.0025808273, y: 4.1462, z: -7.7485704}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1350,7 +1350,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1927503503}
-  m_LocalRotation: {x: 0.2054463, y: 0.00016299165, z: -0.000034215907, w: 0.9786684}
+  m_LocalRotation: {x: 0.2054463, y: 0.00016297481, z: -0.000034212375, w: 0.9786684}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2314,7 +2314,7 @@ MonoBehaviour:
   currHP: 0
   aimTarget: {fileID: 0}
   isAim: 0
-  selfFocus: {fileID: 0}
+  selfFocus: {fileID: 605151242}
 --- !u!95 &5594899106193439039
 Animator:
   serializedVersion: 3

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Cinemachine;
 
 public class ChController : MonoBehaviour
@@ -11,10 +12,11 @@ public class ChController : MonoBehaviour
     public CharacterController controller;
     InputActions inputActions;
     Animator animator;
+    [SerializeField] Collider atColl;
     [SerializeField] Transform cam;
     [SerializeField] GameObject camObj;
     [SerializeField] CinemachineFreeLook freeLookCamera;
-    [SerializeField] Collider atColl;
+    CinemachineInputProvider inputProvider;
     //------------------------------------------
 
 
@@ -99,9 +101,10 @@ public class ChController : MonoBehaviour
     private int currEnemyTarget;
     public bool isAim = false;
     [SerializeField] Transform selfFocus;
+    InputActionReference inputActionRef;
 
     //------------------------------------------
-    
+
     //Animations
 
 
@@ -138,7 +141,7 @@ public class ChController : MonoBehaviour
             animator.SetBool("IsRunning", true);
             animator.SetBool("IsStrafing", false);
             baseSpeed *= 1.6f;
-            freeLookCamera.LookAt = selfFocus;
+            CameraLockOff();
         };
 
         inputActions.Player.Run.canceled += ctx =>
@@ -157,7 +160,8 @@ public class ChController : MonoBehaviour
             {
                 direction = new Vector3(dirInputs.x, 0f, dirInputs.y).normalized;
                 targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-                transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+                if(!isAim)
+                    transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
                 StartCoroutine("Dash");
                 Invoke("StopDash", dashTime + 0.05f);
             }   
@@ -195,10 +199,10 @@ public class ChController : MonoBehaviour
             ctx.ReadValueAsButton();
             isAim = !isAim;
             animator.SetBool("IsStrafing", isAim);
-            if(isAim)
-                CameraFocus();
+            if (isAim)
+                CameraLockOn();
             else
-                freeLookCamera.LookAt = selfFocus;
+                CameraLockOff();
         };
 
 
@@ -208,13 +212,16 @@ public class ChController : MonoBehaviour
             brain = Camera.main.gameObject.AddComponent<CinemachineBrain>();
 
         freeLookCamera = camObj.gameObject.GetComponent<CinemachineFreeLook>();
+        inputProvider = camObj.gameObject.GetComponent<CinemachineInputProvider>();
     }
 
     //------------------------------------------|| START AND UPDATE ||-----------------------------------------
     void Start()
     {
-        OnEnable();
+        inputActionRef = inputProvider.XYAxis;
+        print(inputActionRef);
 
+        OnEnable();
         //Assign components
         referenceToAnimation = GetComponent<Animation>();
         controller = GetComponent<CharacterController>();
@@ -228,6 +235,11 @@ public class ChController : MonoBehaviour
 
     void Update()
     {
+        freeLookCamera.LookAt = aimTarget;
+
+        if (aimTarget == null)
+            CameraLockOff();
+
         if ((isCharging || isAttacking) && controller.isGrounded)
         {
             speed = 0f;
@@ -542,20 +554,21 @@ public class ChController : MonoBehaviour
         }*/
     }
 
-    void CameraFocus()
+    void CameraLockOn()
     {
         GameObject enemy = GameObject.FindGameObjectWithTag("AimTarget");
         aimTarget = enemy.transform;
-
-        /*if (aimTarget == null)
-        {
-            isAim = false;
-            aimTarget = selfFocus;
-        }*/
-        freeLookCamera.LookAt = aimTarget;
-        //virtualCamera.m_LookAt = aimTarget;
+        freeLookCamera.m_BindingMode = CinemachineTransposer.BindingMode.LockToTargetWithWorldUp;
+        inputProvider.XYAxis = null;
     }
 
+    void CameraLockOff()
+    {
+        isAim = false;
+        aimTarget = selfFocus;
+        freeLookCamera.m_BindingMode = CinemachineTransposer.BindingMode.SimpleFollowWithWorldUp;
+        inputProvider.XYAxis = inputActionRef;
+    }
     #endregion
 
     //Input actions enable
