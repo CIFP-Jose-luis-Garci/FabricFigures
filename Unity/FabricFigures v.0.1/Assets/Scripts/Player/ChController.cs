@@ -238,6 +238,8 @@ public class ChController : MonoBehaviour
 
     void Update()
     {
+        animator.SetBool("IsGrounded", controller.isGrounded);
+
         if ((isCharging || isAttacking) && controller.isGrounded)
         {
             speed = 0f;
@@ -261,6 +263,7 @@ public class ChController : MonoBehaviour
         if(isAim && aimTarget != null)
             FocusParticles();
 
+        
     }
 
 
@@ -331,6 +334,7 @@ public class ChController : MonoBehaviour
                 moveDir = Vector3.zero;
             }
             animator.SetFloat("MoveDirY", dirInputs.y);
+            animator.SetFloat("MoveDirX", dirInputs.x);
         }
         else
         {
@@ -348,10 +352,14 @@ public class ChController : MonoBehaviour
         }
         moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
-      
 
-        velocity.y -= gravity * Time.deltaTime;
+        if (controller.isGrounded)
+            velocity.y = -1 * Time.deltaTime;
+        else
+            velocity.y -= gravity * Time.deltaTime;
+
         controller.Move(new Vector3(moveDir.x * speed * moveMult, velocity.y, moveDir.z * speed * moveMult) * Time.deltaTime);
+        animator.SetFloat("Y vel", velocity.y);
     }
 
 
