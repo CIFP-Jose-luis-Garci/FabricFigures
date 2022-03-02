@@ -331,6 +331,7 @@ public class ChController : MonoBehaviour
                 moveDir = Vector3.zero;
             }
             animator.SetFloat("MoveDirY", dirInputs.y);
+            animator.SetFloat("MoveDirX", dirInputs.x);
         }
         else
         {
