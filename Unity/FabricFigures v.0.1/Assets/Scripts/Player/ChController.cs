@@ -96,7 +96,7 @@ public class ChController : MonoBehaviour
 
     //Raycast
     private RaycastHit hit;
-    //[SerializeField] float visionRadius = 6f;
+    [SerializeField] float visionRange = 6f;
     private Vector3 rayOrigin;
     LayerMask layerMask;
 
@@ -105,6 +105,7 @@ public class ChController : MonoBehaviour
     private int currEnemyTarget;
     public bool isAim = false;
     [SerializeField] Transform selfFocus;
+    [SerializeField] GameObject focusParticles;
 
     //------------------------------------------
 
@@ -221,9 +222,8 @@ public class ChController : MonoBehaviour
     //------------------------------------------|| START AND UPDATE ||-----------------------------------------
     void Start()
     {
-        //inputActionRef = inputProvider.XYAxis;
-
         OnEnable();
+
         //Assign components
         referenceToAnimation = GetComponent<Animation>();
         controller = GetComponent<CharacterController>();
@@ -257,6 +257,10 @@ public class ChController : MonoBehaviour
         PlungeHit();
 
         TargetArea();
+
+        if(isAim && aimTarget != null)
+            FocusParticles();
+
     }
 
 
@@ -553,19 +557,31 @@ public class ChController : MonoBehaviour
             Debug.Log("TargetInRange");
             aimTarget = hit.transform;
         }*/
+        if(isAim)
+            if (Physics.Raycast(aimCam.transform.position, aimTarget.position - aimCam.transform.position, out hit))
+            {
+                Debug.DrawRay(rayOrigin, (aimTarget.position - aimCam.transform.position).normalized * hit.distance, Color.red);
+            }
     }
 
+    void FocusParticles()
+    {
+        focusParticles.transform.position = aimTarget.position;
+        focusParticles.transform.rotation = Quaternion.LookRotation(focusParticles.transform.position - aimCam.transform.position);
+    }
     void CameraLockOn()
     {
         GameObject enemy = GameObject.FindGameObjectWithTag("AimTarget");
         aimTarget = enemy.transform;
         tpCam.SetActive(false);
+        focusParticles.SetActive(true);
     }
 
     void CameraLockOff()
     {
         tpCam.SetActive(true);
         isAim = false;
+        focusParticles.SetActive(false);
     }
     #endregion
 
