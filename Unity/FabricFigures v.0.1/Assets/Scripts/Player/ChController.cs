@@ -13,10 +13,14 @@ public class ChController : MonoBehaviour
     InputActions inputActions;
     Animator animator;
     [SerializeField] Collider atColl;
+
+    //Cameras
     [SerializeField] Transform cam;
-    [SerializeField] GameObject camObj;
-    [SerializeField] CinemachineFreeLook freeLookCamera;
-    CinemachineInputProvider inputProvider;
+    [SerializeField] GameObject tpCam;
+    [SerializeField] GameObject aimCam;
+    [SerializeField] CinemachineFreeLook aimCamFL;
+    //CinemachineInputProvider inputProvider;
+
     //------------------------------------------
 
 
@@ -101,7 +105,6 @@ public class ChController : MonoBehaviour
     private int currEnemyTarget;
     public bool isAim = false;
     [SerializeField] Transform selfFocus;
-    InputActionReference inputActionRef;
 
     //------------------------------------------
 
@@ -211,14 +214,14 @@ public class ChController : MonoBehaviour
         if (brain == null)
             brain = Camera.main.gameObject.AddComponent<CinemachineBrain>();
 
-        freeLookCamera = camObj.gameObject.GetComponent<CinemachineFreeLook>();
-        inputProvider = camObj.gameObject.GetComponent<CinemachineInputProvider>();
+        aimCamFL = aimCam.gameObject.GetComponent<CinemachineFreeLook>();
+        //inputProvider = camObj.gameObject.GetComponent<CinemachineInputProvider>();
     }
 
     //------------------------------------------|| START AND UPDATE ||-----------------------------------------
     void Start()
     {
-        inputActionRef = inputProvider.XYAxis;
+        //inputActionRef = inputProvider.XYAxis;
 
         OnEnable();
         //Assign components
@@ -228,17 +231,13 @@ public class ChController : MonoBehaviour
         GameObject mainCam = GameObject.FindGameObjectWithTag("MainCamera");
         cam = mainCam.transform;
 
-        camObj = GameObject.Find("TP Camera");
+        tpCam = GameObject.Find("TP cam");
+        aimCam = GameObject.Find("LockOn cam");
     }
 
 
     void Update()
     {
-        freeLookCamera.LookAt = aimTarget;
-
-        if (aimTarget == null)
-            CameraLockOff();
-
         if ((isCharging || isAttacking) && controller.isGrounded)
         {
             speed = 0f;
@@ -248,15 +247,13 @@ public class ChController : MonoBehaviour
             speed = baseSpeed;
         }
 
-        //if (aimTarget = null)
-            //isAim = false;
-
         if (!isAirHold)
         {
             DashCD();
             Jump();
             Move();
         }
+
         PlungeHit();
 
         TargetArea();
@@ -544,6 +541,11 @@ public class ChController : MonoBehaviour
     //CameraFocus
     void TargetArea()
     {
+        aimCamFL.LookAt = aimTarget;
+
+        if (aimTarget == null)
+            CameraLockOff();
+
         rayOrigin = cam.position;
 
         /*if (Physics.SphereCast(rayOrigin, visionRadius, cam.transform.forward, out hit, 10) && hit.transform.tag == "enemyTarget")
@@ -557,16 +559,13 @@ public class ChController : MonoBehaviour
     {
         GameObject enemy = GameObject.FindGameObjectWithTag("AimTarget");
         aimTarget = enemy.transform;
-        freeLookCamera.m_BindingMode = CinemachineTransposer.BindingMode.LockToTargetWithWorldUp;
-        inputProvider.XYAxis = null;
+        tpCam.SetActive(false);
     }
 
     void CameraLockOff()
     {
+        tpCam.SetActive(true);
         isAim = false;
-        aimTarget = selfFocus;
-        freeLookCamera.m_BindingMode = CinemachineTransposer.BindingMode.SimpleFollowWithWorldUp;
-        inputProvider.XYAxis = inputActionRef;
     }
     #endregion
 
