@@ -141,11 +141,11 @@ public class ChController : MonoBehaviour
         {
             isRunning = ctx.ReadValueAsButton();
             isAim = false;
-            aimTarget = null;
             animator.SetBool("IsRunning", true);
             animator.SetBool("IsStrafing", false);
             baseSpeed *= 1.6f;
-            CameraLockOff();
+            if (!isAim)
+                CameraLockOff();
         };
 
         inputActions.Player.Run.canceled += ctx =>
@@ -579,9 +579,15 @@ public class ChController : MonoBehaviour
 
     void CameraLockOff()
     {
-        tpCam.SetActive(true);
         isAim = false;
+
+        tpCam.transform.position = aimCam.transform.position;
+        if (aimTarget != null)
+            tpCam.transform.rotation = Quaternion.LookRotation(tpCam.transform.position - aimTarget.transform.position);
+        tpCam.SetActive(true);
+
         focusParticles.SetActive(false);
+        aimTarget = null;
     }
     #endregion
 
