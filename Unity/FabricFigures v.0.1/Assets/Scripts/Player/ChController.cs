@@ -97,14 +97,15 @@ public class ChController : MonoBehaviour
     //Raycast
     private RaycastHit hit;
     [SerializeField] float visionRange = 6f;
-    private Vector3 rayOrigin;
+    private Vector3 castOrigin;
     LayerMask layerMask;
 
     //Camera target
-    [SerializeField] Transform aimTarget;
+    [SerializeField] Transform currAim;
+    [SerializeField] List<Transform> aimTargets = new List<Transform>();
     private int currEnemyTarget;
     public bool isAim = false;
-    [SerializeField] Transform selfFocus;
+    [SerializeField] LayerMask targetsLM;
     [SerializeField] GameObject focusParticles;
 
     //------------------------------------------
@@ -134,8 +135,12 @@ public class ChController : MonoBehaviour
         };
 
         //Jump
-        inputActions.Player.Jump.started += ctx => ctx.ReadValueAsButton();
-
+        inputActions.Player.Jump.started += ctx =>
+        {
+            ctx.ReadValueAsButton();
+            if (canJump)
+                animator.SetTrigger("Jump");
+        };
         //Run
         inputActions.Player.Run.started += ctx =>
         {
@@ -162,6 +167,7 @@ public class ChController : MonoBehaviour
 
             if (canDash)
             {
+                animator.SetBool("IsDashing", true);
                 direction = new Vector3(dirInputs.x, 0f, dirInputs.y).normalized;
                 targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
                 if(!isAim)
@@ -260,10 +266,8 @@ public class ChController : MonoBehaviour
 
         TargetArea();
 
-        if(isAim && aimTarget != null)
+        if(isAim && currAim != null)
             FocusParticles();
-
-        
     }
 
 
@@ -275,6 +279,7 @@ public class ChController : MonoBehaviour
     {
         if (controller.isGrounded &&(!isCharging || !isAirHold || !isAttacking))
         {
+            
             canJump = true;
             doubleJump = true;
             velocity.y = -2f;
@@ -315,19 +320,19 @@ public class ChController : MonoBehaviour
         float moveMult = Mathf.Clamp(moveInput, 0f, 1f);
 
         //print(moveMult);
-        if (isAim && aimTarget != null)
+        if (isAim && currAim != null)
         {
             if (isMoving)
             {
                 targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-                Vector3 targetDirection = aimTarget.position - transform.position;
+                Vector3 targetDirection = currAim.position - transform.position;
                 targetDirection.y = 0;
                 var rotation = Quaternion.LookRotation(targetDirection);
                 transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 10f * Time.deltaTime);
             }
             else if (!isMoving)
             {
-                Vector3 targetDirection = aimTarget.position - transform.position;
+                Vector3 targetDirection = currAim.position - transform.position;
                 targetDirection.y = 0;
                 var rotation = Quaternion.LookRotation(targetDirection);
                 transform.rotation = Quaternion.Slerp(transform.rotation, rotation, 10f * Time.deltaTime);
@@ -353,10 +358,8 @@ public class ChController : MonoBehaviour
         moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
 
-        if (controller.isGrounded)
-            velocity.y = -1 * Time.deltaTime;
-        else
-            velocity.y -= gravity * Time.deltaTime;
+
+        velocity.y -= gravity * Time.deltaTime;
 
         controller.Move(new Vector3(moveDir.x * speed * moveMult, velocity.y, moveDir.z * speed * moveMult) * Time.deltaTime);
         animator.SetFloat("Y vel", velocity.y);
@@ -395,6 +398,7 @@ public class ChController : MonoBehaviour
     void StopDash()
     {
         inv = false;
+        animator.SetBool("IsDashing", false);
         StopCoroutine("Dash");
         isDashing = false;
     }
@@ -553,36 +557,72 @@ public class ChController : MonoBehaviour
     //CameraFocus
     void TargetArea()
     {
-        aimCamFL.LookAt = aimTarget;
+        aimCamFL.LookAt = currAim;
 
-        if (aimTarget == null)
+        if (currAim == null)
             CameraLockOff();
 
-        rayOrigin = cam.position;
+        castOrigin = cam.position;
 
-        /*if (Physics.SphereCast(rayOrigin, visionRadius, cam.transform.forward, out hit, 10) && hit.transform.tag == "enemyTarget")
+        /*if (Physics.SphereCast(castOrigin, visionRadius, cam.transform.forward, out hit, 10) && hit.transform.tag == "enemyTarget")
         {
             Debug.Log("TargetInRange");
-            aimTarget = hit.transform;
+            currAim = hit.transform;
         }*/
         if(isAim)
-            if (Physics.Raycast(aimCam.transform.position, aimTarget.position - aimCam.transform.position, out hit))
+            if (Physics.Raycast(aimCam.transform.position, currAim.position - aimCam.transform.position, out hit))
             {
-                Debug.DrawRay(rayOrigin, (aimTarget.position - aimCam.transform.position).normalized * hit.distance, Color.red);
+                Debug.DrawRay(castOrigin, (currAim.position - aimCam.transform.position).normalized * hit.distance, Color.red);
             }
+        
     }
 
     void FocusParticles()
     {
-        focusParticles.transform.position = aimTarget.position;
+        focusParticles.transform.position = currAim.position;
         focusParticles.transform.rotation = Quaternion.LookRotation(focusParticles.transform.position - aimCam.transform.position);
     }
     void CameraLockOn()
     {
-        GameObject enemy = GameObject.FindGameObjectWithTag("AimTarget");
-        aimTarget = enemy.transform;
+        //GameObject enemy = GameObject.FindGameObjectWithTag("AimTarget");
+        //currAim = enemy.transform;
+        FindClosestEnemy();
         tpCam.SetActive(false);
         focusParticles.SetActive(true);
+
+        /*Collider[] targetFocusColliders = Physics.OverlapSphere(castOrigin, visionRange, targetsLM);
+        foreach (var targetFocusCollider in targetFocusColliders)
+        {
+            bool isContained = aimTargets.Contains(targetFocusCollider.gameObject.transform);
+
+            print(isContained);
+            if(!isContained)
+            {
+                aimTargets.Add(targetFocusCollider.gameObject.transform);
+                print(targetFocusCollider.gameObject.name);
+            }
+        }*/
+    }
+
+    public Transform FindClosestEnemy()
+    {
+        GameObject[] enemies;
+        enemies = GameObject.FindGameObjectsWithTag("AimTarget");
+        currAim = null;
+        float distance = Mathf.Infinity;
+        Vector3 position = cam.transform.position;
+        foreach (GameObject enemy in enemies)
+        {
+            Vector3 diff = enemy.transform.position - position;
+            float curDistance = diff.sqrMagnitude;
+            if (curDistance < distance)
+            {
+                currAim = enemy.transform;
+                distance = curDistance;
+            }
+        }
+
+        return currAim;
     }
 
     void CameraLockOff()
@@ -590,12 +630,12 @@ public class ChController : MonoBehaviour
         isAim = false;
 
         tpCam.transform.position = aimCam.transform.position;
-        if (aimTarget != null)
-            tpCam.transform.rotation = Quaternion.LookRotation(tpCam.transform.position - aimTarget.transform.position);
+        if (currAim != null)
+            tpCam.transform.rotation = Quaternion.LookRotation(tpCam.transform.position - currAim.transform.position);
         tpCam.SetActive(true);
 
         focusParticles.SetActive(false);
-        aimTarget = null;
+        currAim = null;
     }
     #endregion
 
