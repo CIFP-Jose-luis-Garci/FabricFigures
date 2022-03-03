@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Teddy_AOv
+  m_Controller: {fileID: 9100000, guid: 9f8f0d77f5aab1540a57a9596d7ba4a6, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: d5340521bbf1feb48b6521f2df968225, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e23781409f5bfa74aabb8b37cf30ea09, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: e6ea2bce3ab681f4ba10118af789a3ba, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 2bc0c88dfc246ec4aba56afe40088aa5, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: e8b7f643e00f3414fac1f92477725a44, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 8b4ce614df04edf4e8ace7f450ea231c, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: abf8e58ab0e6fe443a8d766b10b48275, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ac2ff5143dd5c6f45a78f3819c3f7077, type: 2}
