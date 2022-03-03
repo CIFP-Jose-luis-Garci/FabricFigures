@@ -15,13 +15,9 @@ public class MenuScript : MonoBehaviour
 
     [SerializeField] AudioMixer masterMixer;
 
-    //Text
+    
 
-    [SerializeField] Text volumeText;
-    [SerializeField] Text musicText;
-    [SerializeField] Text sfxText;
-
-    bool reset;
+    
 
 
     private void Start()
@@ -30,10 +26,8 @@ public class MenuScript : MonoBehaviour
         musicSlider.value = GameManager.musicVolumen;
         volumeSlider.value = GameManager.volumeVolumen;
 
-        /*musicText.text = musicSlider.value.ToString();
-        sfxText.text = sfxSlider.value.ToString();
-        volumeText.text = volumeSlider.value.ToString();*/
-        reset = false;
+        
+        
 
     }
 
@@ -50,12 +44,7 @@ public class MenuScript : MonoBehaviour
         PlayerPrefs.SetFloat("musicVol", musicVol);
         GameManager.musicVolumen = PlayerPrefs.GetFloat("musicVol");
 
-        if (reset)
-        {
-            GameManager.musicVolumen = -5f;
-            reset = false;
-
-        }
+        
 
     }
 
@@ -66,12 +55,7 @@ public class MenuScript : MonoBehaviour
         PlayerPrefs.SetFloat("sfxVol", sfxVol);
         GameManager.sfxVolumen = PlayerPrefs.GetFloat("sfxVol");
 
-        if (reset)
-        {
-            GameManager.sfxVolumen = -5f;
-            reset = false;
-
-        }
+        
     }
 
     public void SetVolumeLvl(float volVol)
@@ -81,19 +65,11 @@ public class MenuScript : MonoBehaviour
         PlayerPrefs.SetFloat("volVol", volVol);
         GameManager.volumeVolumen = PlayerPrefs.GetFloat("volVol");
 
-        if (reset)
-        {
-            GameManager.volumeVolumen = -2f;
-            reset = false;
-        }
+        
 
     }
 
-    public void Reset()
-    {
-       reset = true;
-    }
-
+    
     
 
     
