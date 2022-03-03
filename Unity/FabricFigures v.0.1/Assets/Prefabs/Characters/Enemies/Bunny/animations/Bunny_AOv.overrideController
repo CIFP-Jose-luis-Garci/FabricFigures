@@ -8,4 +8,20 @@ AnimatorOverrideController:
   m_PrefabAsset: {fileID: 0}
   m_Name: Bunny_AOv
   m_Controller: {fileID: 9100000, guid: 9f8f0d77f5aab1540a57a9596d7ba4a6, type: 2}
-  m_Clips: []
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: e6ea2bce3ab681f4ba10118af789a3ba, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e6ea2bce3ab681f4ba10118af789a3ba, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 24ece8aac4b26844a9a6f2503ccda92e, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 24ece8aac4b26844a9a6f2503ccda92e, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 8e88593eb33ee5043989c2180ac5d0fb, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 8e88593eb33ee5043989c2180ac5d0fb, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: e8b7f643e00f3414fac1f92477725a44, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e8b7f643e00f3414fac1f92477725a44, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: db5c0c6a5e33a6a49ad8b4f1a7873df2, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: db5c0c6a5e33a6a49ad8b4f1a7873df2, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: d5340521bbf1feb48b6521f2df968225, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: d5340521bbf1feb48b6521f2df968225, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: abf8e58ab0e6fe443a8d766b10b48275, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: abf8e58ab0e6fe443a8d766b10b48275, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: ea6715386851f6e43b7dfee928cb7da8, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: ea6715386851f6e43b7dfee928cb7da8, type: 2}
