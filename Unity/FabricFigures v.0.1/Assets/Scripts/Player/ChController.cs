@@ -208,7 +208,6 @@ public class ChController : MonoBehaviour
         {
             ctx.ReadValueAsButton();
             isAim = !isAim;
-            animator.SetBool("IsStrafing", isAim);
             if (isAim)
                 CameraLockOn();
             else
@@ -245,6 +244,8 @@ public class ChController : MonoBehaviour
     void Update()
     {
         animator.SetBool("IsGrounded", controller.isGrounded);
+        animator.SetBool("IsStrafing", isAim);
+        animator.SetBool("IsAttacking", isAttacking);
 
         if ((isCharging || isAttacking) && controller.isGrounded)
         {
@@ -263,7 +264,7 @@ public class ChController : MonoBehaviour
         }
 
         PlungeHit();
-
+        CameraFocusCheck();
         TargetArea();
 
         if(isAim && currAim != null)
@@ -563,18 +564,21 @@ public class ChController : MonoBehaviour
             CameraLockOff();
 
         castOrigin = cam.position;
+    }
 
-        /*if (Physics.SphereCast(castOrigin, visionRadius, cam.transform.forward, out hit, 10) && hit.transform.tag == "enemyTarget")
-        {
-            Debug.Log("TargetInRange");
-            currAim = hit.transform;
-        }*/
-        if(isAim)
+    void CameraFocusCheck()
+    {
+        if (isAim)
             if (Physics.Raycast(aimCam.transform.position, currAim.position - aimCam.transform.position, out hit))
             {
                 Debug.DrawRay(castOrigin, (currAim.position - aimCam.transform.position).normalized * hit.distance, Color.red);
+                if (hit.collider.gameObject.tag != "Enemy" || hit.distance > 30f)
+                {
+                    print("LockOff, " + hit.collider.gameObject.tag);
+                    CameraLockOff();
+                }
             }
-        
+        print(hit.distance);
     }
 
     void FocusParticles()
@@ -584,24 +588,16 @@ public class ChController : MonoBehaviour
     }
     void CameraLockOn()
     {
-        //GameObject enemy = GameObject.FindGameObjectWithTag("AimTarget");
-        //currAim = enemy.transform;
         FindClosestEnemy();
+
+        if (currAim == null)
+        {
+            isAim = false;
+            return;
+        }
+
         tpCam.SetActive(false);
         focusParticles.SetActive(true);
-
-        /*Collider[] targetFocusColliders = Physics.OverlapSphere(castOrigin, visionRange, targetsLM);
-        foreach (var targetFocusCollider in targetFocusColliders)
-        {
-            bool isContained = aimTargets.Contains(targetFocusCollider.gameObject.transform);
-
-            print(isContained);
-            if(!isContained)
-            {
-                aimTargets.Add(targetFocusCollider.gameObject.transform);
-                print(targetFocusCollider.gameObject.name);
-            }
-        }*/
     }
 
     public Transform FindClosestEnemy()
@@ -615,10 +611,15 @@ public class ChController : MonoBehaviour
         {
             Vector3 diff = enemy.transform.position - position;
             float curDistance = diff.sqrMagnitude;
-            if (curDistance < distance)
+            if (curDistance < distance && curDistance < visionRange)
             {
                 currAim = enemy.transform;
                 distance = curDistance;
+            }
+            else
+            {
+                print(curDistance);
+                currAim = null;
             }
         }
 

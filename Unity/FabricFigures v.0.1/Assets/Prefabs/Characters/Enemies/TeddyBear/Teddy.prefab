@@ -1243,6 +1243,7 @@ GameObject:
   - component: {fileID: 7204425503468123213}
   - component: {fileID: 7543690453129572084}
   - component: {fileID: 6982920137490032858}
+  - component: {fileID: 412945332731310140}
   m_Layer: 9
   m_Name: Teddy
   m_TagString: Enemy
@@ -1309,6 +1310,20 @@ MonoBehaviour:
   lootDropChance: []
   vRange: 0
   vRadius: 0
+--- !u!136 &412945332731310140
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7543690453129572087}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7743089855385226668
 GameObject:
   m_ObjectHideFlags: 0
