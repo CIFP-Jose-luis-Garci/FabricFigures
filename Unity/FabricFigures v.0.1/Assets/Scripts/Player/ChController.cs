@@ -37,12 +37,6 @@ public class ChController : MonoBehaviour
     float targetAngle;
     float angle;
 
-    //Slide
-    Vector3 hitNormal;
-    bool isGrounded;
-    float slopeLimit;
-    float slideFriction = 0.3f;
-
     //Jump
     Vector3 velocity;
     [SerializeField] float gravity = 38f;
@@ -198,9 +192,9 @@ public class ChController : MonoBehaviour
         inputActions.Player.AtH.started += ctx =>
         {
             ctx.ReadValueAsButton();
-            if (!isGrounded && !isAirHold)
+            if (!controller.isGrounded && !isAirHold)
                 Plunge();
-            else if (isGrounded)
+            else if (controller.isGrounded)
                 StartCoroutine("ChargedAttack");
         };
         inputActions.Player.AtH.canceled += ctx =>
@@ -235,7 +229,7 @@ public class ChController : MonoBehaviour
     void Start()
     {
         OnEnable();
-        slopeLimit = controller.slopeLimit;
+
         //Assign components
         referenceToAnimation = GetComponent<Animation>();
         controller = GetComponent<CharacterController>();
@@ -250,17 +244,9 @@ public class ChController : MonoBehaviour
 
     void Update()
     {
-        if ((Vector3.Angle(Vector3.up, hitNormal) <= slopeLimit && controller.isGrounded))
-            isGrounded = true;
-        else
-            isGrounded = false;
-        
-        print(isGrounded);
+        animator.SetBool("IsGrounded", controller.isGrounded);
 
-        animator.SetBool("IsGrounded", isGrounded);
-        animator.SetBool("IsAttacking", isAttacking);
-
-        if ((isCharging || isAttacking) && isGrounded)
+        if ((isCharging || isAttacking) && controller.isGrounded)
         {
             speed = 0f;
         }
@@ -282,8 +268,6 @@ public class ChController : MonoBehaviour
 
         if(isAim && currAim != null)
             FocusParticles();
-
-        SurfaceSlide();
     }
 
 
@@ -293,11 +277,12 @@ public class ChController : MonoBehaviour
     //Jump
     void Jump()
     {
-        if (isGrounded &&(!isCharging || !isAirHold || !isAttacking))
+        if (controller.isGrounded &&(!isCharging || !isAirHold || !isAttacking))
         {
-            velocity.y = -2f;
+            
             canJump = true;
             doubleJump = true;
+            velocity.y = -2f;
         }
         else
         {
@@ -378,8 +363,6 @@ public class ChController : MonoBehaviour
 
         controller.Move(new Vector3(moveDir.x * speed * moveMult, velocity.y, moveDir.z * speed * moveMult) * Time.deltaTime);
         animator.SetFloat("Y vel", velocity.y);
-
-        
     }
 
 
@@ -405,7 +388,6 @@ public class ChController : MonoBehaviour
         {
             inv = true;
             isDashing = true;
-            AttackAnimEnd();
             dashCD = 1f;
             velocity = Vector3.zero;
             controller.Move(Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward * dashSpeed * Time.deltaTime);
@@ -523,7 +505,7 @@ public class ChController : MonoBehaviour
     }
     void PlungeHit()
     {
-        if (isGrounded && isPlunging)
+        if (controller.isGrounded && isPlunging)
         {
             StopCoroutine("PlungeFall");
             animator.SetTrigger("PlungeHit");
@@ -539,16 +521,16 @@ public class ChController : MonoBehaviour
     }
     IEnumerator PlungeFall()
     {
-        while (!isGrounded)
+        while (!controller.isGrounded)
         {
             //plungeSpeed /= Time.deltaTime;
-            controller.Move(new Vector3(((1f - hitNormal.y) * hitNormal.x), -60, ((1f - hitNormal.y) * hitNormal.z)) * Time.deltaTime * slideFriction); ;
+            controller.Move(Vector3.down * plungeSpeed * Time.deltaTime);
             yield return null;
         }
     }
     IEnumerator AirHold()
     {
-        while(!isGrounded)
+        while(!controller.isGrounded)
         {
             isAirHold = true;
             velocity.y = 0f;
@@ -666,21 +648,5 @@ public class ChController : MonoBehaviour
     private void OnDisable()
     {
         inputActions.Disable();
-    }
-
-
-    //Wall slide
-    void OnControllerColliderHit (ControllerColliderHit hit)
-    {
-        if(hit.gameObject.layer == 8)
-            hitNormal = hit.normal;
-    }
-
-    void SurfaceSlide()
-    {
-        if(velocity.y < -3 && hitNormal != null)
-        {
-            controller.Move(new Vector3(((1f - hitNormal.y) * hitNormal.x), velocity.y * Time.deltaTime * 30, ((1f - hitNormal.y) * hitNormal.z)) * Time.deltaTime * slideFriction);
-        }
     }
 }
