@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ZombieController : MonoBehaviour
+public class Teddy_scr : MonoBehaviour
 {
     //VARIABLES
 
@@ -41,7 +41,8 @@ public class ZombieController : MonoBehaviour
         //Get components
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        player = GameObject.Find("Survivor");
+        player = GameObject.FindGameObjectWithTag("Player");
+        enemy = gameObject.transform;
         //Dissable colliders
         DisableAtCol();
 
@@ -74,29 +75,25 @@ public class ZombieController : MonoBehaviour
 
             if (targetDistance > 0.1f && !aggro)
             {
-                animator.SetBool("Walk", true);
-                animator.SetBool("Run", false);
+                animator.SetBool("IsWalking", true);
             }
             else if (targetDistance > agent.stoppingDistance && aggro)
             {
                 DisableAtCol();
-                animator.SetBool("Run", true);
-                animator.SetBool("Walk", false);
-                animator.SetBool("InRange", false);
+                //animator.SetBool("InRange", false);
             }
             else
             {
                 if (aggro)
                 {
-                    animator.SetBool("InRange", true);
+                    //animator.SetBool("InRange", true);
                     EnableAtCol();
                 }
                 else
                 {
                     DisableAtCol();
-                    animator.SetBool("InRange", false);
-                    animator.SetBool("Walk", false);
-                    animator.SetBool("Run", false);
+                    //animator.SetBool("InRange", false);
+                    animator.SetBool("IsWalking", false);
                 }
             }            
         }
@@ -137,9 +134,9 @@ public class ZombieController : MonoBehaviour
         isIdle = true;
         agent.speed = 0f;
         target = enemyPos;
-        animator.SetBool("Walk", false);
-        animator.SetBool("Run", false);
-        animator.SetBool("InRange", false);
+        //animator.SetBool("Walk", false);
+        //animator.SetBool("Run", false);
+        //animator.SetBool("InRange", false);
 
         while (!aggro)
         {

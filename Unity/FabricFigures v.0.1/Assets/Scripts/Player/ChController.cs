@@ -578,7 +578,6 @@ public class ChController : MonoBehaviour
                     CameraLockOff();
                 }
             }
-        print(hit.distance);
     }
 
     void FocusParticles()
