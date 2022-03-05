@@ -8,19 +8,24 @@ public class Teddy_scr : MonoBehaviour
     //VARIABLES
 
     //Components
-    Animator animator;
-    NavMeshAgent agent;
+    private Animator animator;
+    private NavMeshAgent agent;
     [SerializeField] LayerMask layerMask;
-    [SerializeField] Collider[] attackColliders;
 
     //Objects
     [SerializeField] GameObject player;
     [SerializeField] Transform enemy;
+    [SerializeField] Transform[] pathPoints;
+    [SerializeField] Transform aimTarget;
 
     //Position
-    Vector3 enemyPos;
-    Vector3 startPos;
-    Vector3 newPos;
+    private Vector3 enemyPos;
+    private Vector3 startPos;
+    private Vector3 newPos;
+
+    //Idle route
+    [SerializeField] Collider[] attackColliders;
+    private int destPoint = 0;
     [SerializeField] float movementArea;
 
     //Aggro and detection
@@ -28,14 +33,15 @@ public class Teddy_scr : MonoBehaviour
     bool isIdle = true;
     [SerializeField] float visionRange = 10f;
     [SerializeField] float visionAngle = 60f;
-    Vector3 target;
+    private Vector3 target;
     float targetDistance;
 
     //Raycast
     Vector3 rayCastPos;
     RaycastHit hit;
 
-    // Start is called before the first frame update
+    //METHODS
+    #region START - UPDATE
     void Start()
     {
         //Get components
@@ -43,6 +49,7 @@ public class Teddy_scr : MonoBehaviour
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
         enemy = gameObject.transform;
+
         //Dissable colliders
         DisableAtCol();
 
@@ -53,49 +60,33 @@ public class Teddy_scr : MonoBehaviour
         enemyPos = enemy.position;
         target = enemyPos;
         startPos = transform.position;
+
+        //Other
+        agent.autoBraking = false;
+        GotoNextPoint();
     }
 
     void Update()
     {
-        //Debug.Log(aggro);
+        Debug.Log(destPoint);
 
         //Raycast
         enemyPos = enemy.position;
-        rayCastPos = new Vector3(enemyPos.x, enemyPos.y + 1.4f, enemyPos.z);
+        rayCastPos = aimTarget.position;
 
-        Vision();
+        //Vision();
 
         //Animations & aggro state
         if (target != null)
         {
-
             targetDistance = Vector3.Distance(transform.position, target);
             if (targetDistance > 0.3f)
                 FaceTarget();
 
             if (targetDistance > 0.1f && !aggro)
             {
-                animator.SetBool("IsWalking", true);
+                //animator.SetBool("IsWalking", true);
             }
-            else if (targetDistance > agent.stoppingDistance && aggro)
-            {
-                DisableAtCol();
-                //animator.SetBool("InRange", false);
-            }
-            else
-            {
-                if (aggro)
-                {
-                    //animator.SetBool("InRange", true);
-                    EnableAtCol();
-                }
-                else
-                {
-                    DisableAtCol();
-                    //animator.SetBool("InRange", false);
-                    animator.SetBool("IsWalking", false);
-                }
-            }            
         }
 
         //Aggro follow
@@ -119,41 +110,13 @@ public class Teddy_scr : MonoBehaviour
             aggro = false;
             StartCoroutine("Idle");
         }
+
+        if (!agent.pathPending && agent.remainingDistance < 0.5f && pathPoints[destPoint].gameObject.tag != "WaitPathPoint")
+            GotoNextPoint();
     }
+    #endregion
 
-    //METHODS
-
-    void FaceTarget()
-    {
-        Vector3 direction = (target - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0f, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
-    }
-    IEnumerator Idle()
-    {
-        isIdle = true;
-        agent.speed = 0f;
-        target = enemyPos;
-        //animator.SetBool("Walk", false);
-        //animator.SetBool("Run", false);
-        //animator.SetBool("InRange", false);
-
-        while (!aggro)
-        {
-            //New destination
-            agent.speed = 1f;
-
-            RandomPos();
-            target = newPos;
-            agent.SetDestination(target);
-
-            //Waiting time
-            float r = Random.Range(0f, 5f);
-            float t = Vector3.Distance(enemyPos, target) / agent.speed;
-            yield return new WaitForSeconds(5f + t + r);
-        }
-    }
-
+    #region Attacks
     //Enable/disable attack colliders
     void EnableAtCol()
     {
@@ -168,6 +131,28 @@ public class Teddy_scr : MonoBehaviour
         {
             atCol.enabled = false;
         }
+    }
+    #endregion
+
+    #region Patrol & vision
+    IEnumerator Idle()
+    {
+        isIdle = true;
+        //agent.speed = 0f;
+        target = enemyPos;
+
+        while (!aggro)
+        {
+            //New destination
+            agent.speed = 2f;
+            yield return null;
+        }
+    }
+    void FaceTarget()
+    {
+        Vector3 direction = (agent.destination - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0f, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
     void Vision()
     {
@@ -224,18 +209,24 @@ public class Teddy_scr : MonoBehaviour
             }
         }
     }
+    void GotoNextPoint()
+    {
+        // Returns if no points have been set up
+        if (pathPoints.Length == 0)
+            return;
 
+        // Set the agent to go to the currently selected destination.
+        agent.destination = pathPoints[destPoint].position;
+
+        // Choose the next point in the array as the destination,
+        // cycling to the start if necessary.
+        destPoint = (destPoint + 1) % pathPoints.Length;
+    }
     void StartIdle()
     {
         aggro = false;
         StartCoroutine("Idle");
     }
+    #endregion
 
-    void RandomPos()
-    {
-        float newX = startPos.x + Random.Range(-movementArea, movementArea);
-        float newZ = startPos.z + Random.Range(-movementArea, movementArea);
-
-        newPos = new Vector3(newX, enemyPos.y, newZ);
-    }
 }

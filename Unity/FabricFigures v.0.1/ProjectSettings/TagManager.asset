@@ -6,6 +6,7 @@ TagManager:
   tags:
   - AimTarget
   - Enemy
+  - WaitPathPoint
   layers:
   - Default
   - TransparentFX
