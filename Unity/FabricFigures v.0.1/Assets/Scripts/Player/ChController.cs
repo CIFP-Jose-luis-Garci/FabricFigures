@@ -73,7 +73,6 @@ public class ChController : MonoBehaviour
     public float _pDmg = 30f;
 
     //Charge
-    [SerializeField] float maxCharge = 2f;
     public float currentCharge;
     bool isCharging = false;
     bool isAttacking = false;
@@ -202,7 +201,7 @@ public class ChController : MonoBehaviour
             if (!isGrounded && !isAirHold)
                 Plunge();
             else if (isGrounded)
-                StartCoroutine("ChargedAttack");
+                StartCoroutine("HeavyAttackCharge");
         };
         inputActions.Player.AtH.canceled += ctx =>
         {
@@ -262,6 +261,7 @@ public class ChController : MonoBehaviour
         animator.SetBool("IsGrounded", isGrounded);
         animator.SetBool("IsStrafing", isAim);
         animator.SetBool("IsAttacking", isAttacking);
+        animator.SetBool("IsCharging", isCharging);
 
         if (isAttacking)
             animator.SetLayerWeight(1, 1);
@@ -353,7 +353,7 @@ public class ChController : MonoBehaviour
     //Movement
     private void Move()
     {
-        if (isDashing)
+        if (isDashing || isCharging)
             return;
 
         direction = new Vector3(dirInputs.x, 0f, dirInputs.y).normalized;
@@ -518,48 +518,61 @@ public class ChController : MonoBehaviour
     }
 
     //Charged attack
-    void ChargedAttackRelease()
-    {
-        if(isCharging)
-        {
-            float t = 0.3f;
-            turnSmoothTime = 0.6f;
-            if (currentCharge >= maxCharge)
-            {
-                animator.SetTrigger("HeavyC");
-                StopCoroutine("ChargedAttack");
-                currentCharge = 0f;
-                t = 0.8f;
-            }
-            else if (currentCharge < maxCharge)
-            {
-                animator.SetTrigger("HeavyNC");
-                StopCoroutine("ChargedAttack");
-                currentCharge = 0f;
-                t = 0.3f;
-            }
-
-            Invoke("AttackAnimEnd", t);
-        }
-    }
-
-    IEnumerator ChargedAttack()
+    IEnumerator HeavyAttackCharge()
     {
         while(true)
         {
+            animator.SetBool("HeavyAttack", true);
             turnSmoothTime = Mathf.Infinity;
             isCharging = true;
             currentCharge += 0.2f;
 
-            if (currentCharge >= maxCharge)
+            if (currentCharge >= 3)
                 ChargedAttackRelease();
 
             yield return new WaitForSeconds(0.1f);
         }   
     }
 
+    void ChargedAttackRelease()
+    {
+        turnSmoothTime = 0.6f;
+        StopCoroutine("HeavyAttackCharge");
+
+        //Animations
+        animator.SetFloat("HeavyCharge",currentCharge);
+        animator.SetBool("HeavyAttack", false);
+        StartCoroutine("HeavyAttack");
+        Invoke("StopHeavyAttack", 1.2f);
+        Invoke("AttackAnimEnd", 1.3f);
+
+        currentCharge = 0f;
+    }
+
+    IEnumerator HeavyAttack()
+    {
+        startTime = Time.time;
+
+        while (Time.time < startTime + 0.5f)
+        {
+            isCharging = true;
+            turnSmoothTime = 0.6f;
+            atColl.enabled = true;
+            velocity = Vector3.zero;
+            controller.Move(Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward * 8f * Time.deltaTime);
+            yield return null;
+        }
+    }
+    void StopHeavyAttack()
+    {
+        StopCoroutine("HeavyAttack");
+        animator.SetTrigger("HeavyAttackEnd");
+    }
+
+
     void AttackAnimEnd()
     {
+        animator.ResetTrigger("HeavyAttackEnd");
         comboLevel = 0;
         isCharging = false;
         isAttacking = false;
