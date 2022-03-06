@@ -56,7 +56,13 @@ public class ChController : MonoBehaviour
     float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
 
-    
+    //Slide
+    Vector3 hitNormal;
+    bool isGrounded;
+    float slopeLimit;
+    float slideFriction = 0.3f;
+
+
 
     //------------------------------------------
 
@@ -192,9 +198,9 @@ public class ChController : MonoBehaviour
         inputActions.Player.AtH.started += ctx =>
         {
             ctx.ReadValueAsButton();
-            if (!controller.isGrounded && !isAirHold)
+            if (!isGrounded && !isAirHold)
                 Plunge();
-            else if (controller.isGrounded)
+            else if (isGrounded)
                 StartCoroutine("ChargedAttack");
         };
         inputActions.Player.AtH.canceled += ctx =>
@@ -229,6 +235,8 @@ public class ChController : MonoBehaviour
     {
         OnEnable();
 
+        slopeLimit = controller.slopeLimit;
+
         //Assign components
         referenceToAnimation = GetComponent<Animation>();
         controller = GetComponent<CharacterController>();
@@ -243,11 +251,16 @@ public class ChController : MonoBehaviour
 
     void Update()
     {
-        animator.SetBool("IsGrounded", controller.isGrounded);
+        if ((Vector3.Angle(Vector3.up, hitNormal) <= slopeLimit && controller.isGrounded))
+            isGrounded = true;
+        else
+            isGrounded = false;
+
+        animator.SetBool("IsGrounded", isGrounded);
         animator.SetBool("IsStrafing", isAim);
         animator.SetBool("IsAttacking", isAttacking);
 
-        if ((isCharging || isAttacking) && controller.isGrounded)
+        if ((isCharging || isAttacking) && isGrounded)
         {
             speed = 0f;
         }
@@ -266,7 +279,7 @@ public class ChController : MonoBehaviour
         PlungeHit();
         CameraFocusCheck();
         TargetArea();
-
+        SurfaceSlide();
         if(isAim && currAim != null)
             FocusParticles();
     }
@@ -278,7 +291,7 @@ public class ChController : MonoBehaviour
     //Jump
     void Jump()
     {
-        if (controller.isGrounded &&(!isCharging || !isAirHold || !isAttacking))
+        if (isGrounded &&(!isCharging || !isAirHold || !isAttacking))
         {
             
             canJump = true;
@@ -358,8 +371,6 @@ public class ChController : MonoBehaviour
         }
         moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
-
-
         velocity.y -= gravity * Time.deltaTime;
 
         controller.Move(new Vector3(moveDir.x * speed * moveMult, velocity.y, moveDir.z * speed * moveMult) * Time.deltaTime);
@@ -402,13 +413,33 @@ public class ChController : MonoBehaviour
         animator.SetBool("IsDashing", false);
         StopCoroutine("Dash");
         isDashing = false;
+        AttackAnimEnd();
     }
 
+    void ResetJumpTrigger()
+    {
+        animator.ResetTrigger("Jump");
+    }
+
+    //Wall slide
+    void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.layer == 8)
+            hitNormal = hit.normal;
+    }
+
+    void SurfaceSlide()
+    {
+        if (velocity.y < -3 && hitNormal != null)
+        {
+            controller.Move(new Vector3(((1f - hitNormal.y) * hitNormal.x), velocity.y * Time.deltaTime * 30, ((1f - hitNormal.y) * hitNormal.z)) * Time.deltaTime * slideFriction);
+        }
+    }
 
     #endregion
 
     #region COMBAT
-    
+
     //Light attack
     public void LightAttackCombo()
     {
@@ -506,7 +537,7 @@ public class ChController : MonoBehaviour
     }
     void PlungeHit()
     {
-        if (controller.isGrounded && isPlunging)
+        if (isGrounded && isPlunging)
         {
             StopCoroutine("PlungeFall");
             animator.SetTrigger("PlungeHit");
@@ -522,16 +553,16 @@ public class ChController : MonoBehaviour
     }
     IEnumerator PlungeFall()
     {
-        while (!controller.isGrounded)
+        while (!isGrounded)
         {
             //plungeSpeed /= Time.deltaTime;
-            controller.Move(Vector3.down * plungeSpeed * Time.deltaTime);
+            controller.Move(new Vector3(((1f - hitNormal.y) * hitNormal.x), -60, ((1f - hitNormal.y) * hitNormal.z)) * Time.deltaTime * slideFriction);
             yield return null;
         }
     }
     IEnumerator AirHold()
     {
-        while(!controller.isGrounded)
+        while(!isGrounded)
         {
             isAirHold = true;
             velocity.y = 0f;
