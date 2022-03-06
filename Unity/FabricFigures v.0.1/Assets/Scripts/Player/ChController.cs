@@ -105,7 +105,7 @@ public class ChController : MonoBehaviour
     private RaycastHit hit;
     [SerializeField] float visionRange = 6f;
     private Vector3 castOrigin;
-    LayerMask layerMask;
+    LayerMask layerMask = 6;
 
     //Camera target
     [SerializeField] Transform currAim;
@@ -273,9 +273,26 @@ public class ChController : MonoBehaviour
             speed = 0f;
         else if (slide)
             speed = 2f;
+        else if (isAim && currAim != null)
+        {
+            Vector3 vectorToTarget = (currAim.position - transform.position);
+            vectorToTarget.y = 0f;
+            float distToTarget = vectorToTarget.magnitude;
+            print(distToTarget);
+            float aimSpeed = baseSpeed * (distToTarget/6f);
+
+            if (distToTarget >= 6f)
+                speed = baseSpeed;
+            else if (distToTarget < 6f && aimSpeed > 2f)
+                speed = aimSpeed;
+            else
+                speed = 2f;
+        }
+
         else
             speed = baseSpeed;
 
+        print(speed);
 
         //Calling methods
         if (!isAirHold)
@@ -393,7 +410,7 @@ public class ChController : MonoBehaviour
         if (dashCD > 0f)
         {
             canDash = false;
-            dashCD -= 0.5f * Time.deltaTime;
+            dashCD -= 0.8f * Time.deltaTime;
         }
         else if (dashCD <= 0f && (!isCharging || !isAirHold || !isAttacking))
         {
@@ -404,12 +421,12 @@ public class ChController : MonoBehaviour
     IEnumerator Dash()
     {
         startTime = Time.time;
-            //print("Dash!");
+        
         while (Time.time < startTime + dashTime)
         {
             inv = true;
             isDashing = true;
-            dashCD = 1f;
+            dashCD = 0.5f;
             velocity = Vector3.zero;
             controller.Move(Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward * dashSpeed * Time.deltaTime);
             yield return null;
@@ -625,7 +642,7 @@ public class ChController : MonoBehaviour
     void CameraFocusCheck()
     {
         if (isAim)
-            if (Physics.Raycast(aimCam.transform.position, currAim.position - aimCam.transform.position, out hit))
+            if (Physics.Raycast(aimCam.transform.position, currAim.position - aimCam.transform.position, out hit, layerMask))
             {
                 Debug.DrawRay(castOrigin, (currAim.position - aimCam.transform.position).normalized * hit.distance, Color.red);
                 if (hit.collider.gameObject.tag != "Enemy" || hit.distance > 30f)
