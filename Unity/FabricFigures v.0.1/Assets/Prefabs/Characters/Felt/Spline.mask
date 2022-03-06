@@ -7,5 +7,55 @@ AvatarMask:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Spline
-  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-  m_Elements: []
+  m_Mask: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: group1
+    m_Weight: 0
+  - m_Path: group1/Sphere003
+    m_Weight: 1
+  - m_Path: group1/Sphere003/Cylinder002
+    m_Weight: 1
+  - m_Path: group1/Sphere003/Cylinder003
+    m_Weight: 1
+  - m_Path: group1/Sphere003/Object001
+    m_Weight: 1
+  - m_Path: group1/Sphere003/Plane003
+    m_Weight: 1
+  - m_Path: joint1
+    m_Weight: 0
+  - m_Path: joint1/joint2
+    m_Weight: 1
+  - m_Path: joint1/joint2/brazoL
+    m_Weight: 1
+  - m_Path: joint1/joint2/brazoL/joint6
+    m_Weight: 1
+  - m_Path: joint1/joint2/brazoL/joint6/joint7
+    m_Weight: 1
+  - m_Path: joint1/joint2/brazoL/joint6/joint7/joint8
+    m_Weight: 1
+  - m_Path: joint1/joint2/brazoR
+    m_Weight: 1
+  - m_Path: joint1/joint2/brazoR/joint20
+    m_Weight: 1
+  - m_Path: joint1/joint2/brazoR/joint20/joint21
+    m_Weight: 1
+  - m_Path: joint1/joint2/brazoR/joint20/joint21/joint22
+    m_Weight: 1
+  - m_Path: joint1/joint2/joint3
+    m_Weight: 1
+  - m_Path: joint1/joint2/joint3/joint4
+    m_Weight: 0
+  - m_Path: joint1/joint2/joint3/joint11
+    m_Weight: 0
+  - m_Path: joint1/joint2/joint3/joint12
+    m_Weight: 0
+  - m_Path: joint1/piernaL
+    m_Weight: 0
+  - m_Path: joint1/piernaL/joint24
+    m_Weight: 0
+  - m_Path: joint1/piernaR
+    m_Weight: 0
+  - m_Path: joint1/piernaR/joint23
+    m_Weight: 0

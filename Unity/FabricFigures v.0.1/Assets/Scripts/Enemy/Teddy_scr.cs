@@ -68,7 +68,7 @@ public class Teddy_scr : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(destPoint);
+        //Debug.Log(destPoint);
 
         //Raycast
         enemyPos = enemy.position;

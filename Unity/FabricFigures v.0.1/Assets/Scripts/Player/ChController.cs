@@ -57,6 +57,7 @@ public class ChController : MonoBehaviour
     float turnSmoothVelocity;
 
     //Slide
+    bool slide;
     Vector3 hitNormal;
     bool isGrounded;
     float slopeLimit;
@@ -80,7 +81,7 @@ public class ChController : MonoBehaviour
     //Air hold
     bool isAirHold = false;
     bool isPlunging = false;
-    float plungeSpeed = 40f;
+    float plungeSpeed = -60f;
 
     //Combo animations
     bool canAttack = true;
@@ -251,24 +252,32 @@ public class ChController : MonoBehaviour
 
     void Update()
     {
+        //Grounded state
         if ((Vector3.Angle(Vector3.up, hitNormal) <= slopeLimit && controller.isGrounded))
             isGrounded = true;
         else
             isGrounded = false;
 
+        //Animations
         animator.SetBool("IsGrounded", isGrounded);
         animator.SetBool("IsStrafing", isAim);
         animator.SetBool("IsAttacking", isAttacking);
 
-        if ((isCharging || isAttacking) && isGrounded)
-        {
-            speed = 0f;
-        }
+        if (isAttacking)
+            animator.SetLayerWeight(1, 1);
         else
-        {
-            speed = baseSpeed;
-        }
+            animator.SetLayerWeight(1, 0);
 
+        //Speed modifications
+        if ((isCharging) && isGrounded)
+            speed = 0f;
+        else if (slide)
+            speed = 2f;
+        else
+            speed = baseSpeed;
+
+
+        //Calling methods
         if (!isAirHold)
         {
             DashCD();
@@ -276,10 +285,13 @@ public class ChController : MonoBehaviour
             Move();
         }
 
+        if(slide)
+            SurfaceSlide();
+
         PlungeHit();
         CameraFocusCheck();
         TargetArea();
-        SurfaceSlide();
+
         if(isAim && currAim != null)
             FocusParticles();
     }
@@ -304,14 +316,12 @@ public class ChController : MonoBehaviour
         }
         if (inputActions.Player.Jump.triggered && canJump)
         {
-            //print("Jump!");
             velocity.y = 0f;
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * -gravity);
             
         }
         if (inputActions.Player.Jump.triggered && !canJump && doubleJump)
         {
-            //print("Double jump!");
             velocity.y = 0f;
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * -gravity);
             doubleJump = false;
@@ -377,7 +387,6 @@ public class ChController : MonoBehaviour
         animator.SetFloat("Y vel", velocity.y);
     }
 
-
     //Dash
     private void DashCD()
     {
@@ -419,21 +428,40 @@ public class ChController : MonoBehaviour
     void ResetJumpTrigger()
     {
         animator.ResetTrigger("Jump");
+        animator.ResetTrigger("PlungeAttack");
+        animator.ResetTrigger("PlungeHit");
     }
 
     //Wall slide
     void OnControllerColliderHit(ControllerColliderHit hit)
     {
         if (hit.gameObject.layer == 8)
+        {
             hitNormal = hit.normal;
+            if (hit.normal.y <= 0.7f)
+                slide = true;
+            else
+                slide = false;
+        }
+    }
+
+    //Collisions
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == 8)
+        {
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.layer == 8)
+        {
+        }
     }
 
     void SurfaceSlide()
     {
-        if (velocity.y < -3 && hitNormal != null)
-        {
-            controller.Move(new Vector3(((1f - hitNormal.y) * hitNormal.x), velocity.y * Time.deltaTime * 30, ((1f - hitNormal.y) * hitNormal.z)) * Time.deltaTime * slideFriction);
-        }
+         controller.Move(new Vector3(((1f - hitNormal.y) * hitNormal.x), -400, ((1f - hitNormal.y) * hitNormal.z)) * Time.deltaTime);
     }
 
     #endregion
@@ -443,14 +471,12 @@ public class ChController : MonoBehaviour
     //Light attack
     public void LightAttackCombo()
     {
-        if(!canAttack && !isDashing)
+        if(!canAttack || isDashing)
         {
             return;
         }
         canAttack = false;
         isAttacking = true;
-
-        turnSmoothTime = Mathf.Infinity;
 
         if (comboLevel == attackAnimationClip.Length)
             comboLevel = 0;
@@ -555,8 +581,7 @@ public class ChController : MonoBehaviour
     {
         while (!isGrounded)
         {
-            //plungeSpeed /= Time.deltaTime;
-            controller.Move(new Vector3(((1f - hitNormal.y) * hitNormal.x), -60, ((1f - hitNormal.y) * hitNormal.z)) * Time.deltaTime * slideFriction);
+            controller.Move(new Vector3(((1f - hitNormal.y) * hitNormal.x), plungeSpeed, ((1f - hitNormal.y) * hitNormal.z)) * Time.deltaTime * slideFriction);
             yield return null;
         }
     }
