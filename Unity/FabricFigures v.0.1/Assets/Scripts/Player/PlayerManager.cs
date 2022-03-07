@@ -64,7 +64,7 @@ public class PlayerManager : MonoBehaviour
         inv = false;
     }
 
-    void Death()
+    public void Death()
     {
         alive = false;
         animator.SetTrigger("Death");
