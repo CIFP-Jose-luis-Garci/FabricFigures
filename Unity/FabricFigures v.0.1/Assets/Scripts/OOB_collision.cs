@@ -17,6 +17,7 @@ public class OOB_collision : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
+            print("You have fallen!");
             pMan.currHealth = 0;
             pMan.Death();
         }
