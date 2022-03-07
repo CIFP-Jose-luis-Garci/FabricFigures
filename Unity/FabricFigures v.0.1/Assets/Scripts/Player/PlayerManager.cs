@@ -39,7 +39,7 @@ public class PlayerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (currHealth <= 0)
+        if (currHealth <= 0 && alive)
             Death();
     }
 
@@ -67,10 +67,15 @@ public class PlayerManager : MonoBehaviour
     public void Death()
     {
         alive = false;
-        animator.SetTrigger("Death");
-        hud.FadeToBlack(true);
+        animator.SetBool("Death", true);
         chController.CameraLockOff();
-        Invoke("Restart", 5f);
+        Invoke("Transition", 4f);
+        Invoke("Restart", 6f);
+    }
+
+    void Transition()
+    {
+        hud.FadeToBlack(false);
     }
     void Restart()
     {

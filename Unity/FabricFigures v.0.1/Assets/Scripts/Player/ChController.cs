@@ -316,6 +316,9 @@ public class ChController : MonoBehaviour
 
             PlungeHit();
         }
+        else
+            controller.Move(Vector3.down * 2f);
+
         if (slide)
             SurfaceSlide();
         

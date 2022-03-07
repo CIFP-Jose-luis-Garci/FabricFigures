@@ -17,6 +17,7 @@ public class OOB_collision : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
+            pMan.currHealth = 0;
             pMan.Death();
         }
     }

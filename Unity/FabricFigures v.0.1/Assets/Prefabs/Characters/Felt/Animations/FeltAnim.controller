@@ -1198,12 +1198,6 @@ AnimatorController:
   m_Name: FeltAnim
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Death
-    m_Type: 9
-    m_DefaultFloat: 0
-    m_DefaultInt: 0
-    m_DefaultBool: 0
-    m_Controller: {fileID: 0}
   - m_Name: Staggered
     m_Type: 9
     m_DefaultFloat: 0
@@ -1302,6 +1296,12 @@ AnimatorController:
     m_Controller: {fileID: 0}
   - m_Name: HeavyAttackEnd
     m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: Death
+    m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0

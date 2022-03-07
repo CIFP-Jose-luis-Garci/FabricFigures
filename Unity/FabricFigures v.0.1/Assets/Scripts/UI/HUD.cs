@@ -12,7 +12,7 @@ public class HUD : MonoBehaviour
 
     //Sprites & text
     [SerializeField] Image fadeScreen;
-    int fadeSpeed = 5;
+    int fadeSpeed = 1;
     public Sprite[] healthbarArray;
     [SerializeField] Text currencyText;
     public Image healthbar;
@@ -20,7 +20,7 @@ public class HUD : MonoBehaviour
     void Start()
     {
         playerManager = gameObject.GetComponent<PlayerManager>();
-        FadeToBlack(false);
+        StartCoroutine(FadeToBlack(true));
     }
 
     public void HealthBarUpdate()
