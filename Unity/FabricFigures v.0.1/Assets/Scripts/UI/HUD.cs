@@ -20,6 +20,7 @@ public class HUD : MonoBehaviour
     void Start()
     {
         playerManager = gameObject.GetComponent<PlayerManager>();
+        FadeToBlack(false);
     }
 
     public void HealthBarUpdate()
