@@ -10,6 +10,7 @@ public class CurrencyPickup : MonoBehaviour
 	//Components
 	GameObject player;
 	PlayerManager pMan;
+	HUD hud;
 	Animator anim;
 
 	//Main
@@ -23,6 +24,7 @@ public class CurrencyPickup : MonoBehaviour
 	{
 		player = GameObject.FindGameObjectWithTag("Player");
 		pMan = player.GetComponent<PlayerManager>();
+		hud = player.GetComponent<HUD>();
 		
 		//Determine value
 		Value();
@@ -56,6 +58,7 @@ public class CurrencyPickup : MonoBehaviour
 		if (other.gameObject.tag == "Player")
 		{
 			pMan.charCurrency += pickupValue;
+			hud.CurrencyUpdate();
 			//Debug.Log(pMan.charCurrency);
 			Destroy(gameObject);
 		}

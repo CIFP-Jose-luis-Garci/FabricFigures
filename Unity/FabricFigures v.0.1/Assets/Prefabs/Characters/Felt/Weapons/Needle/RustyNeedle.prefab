@@ -91,6 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4022023934688463644}
   - component: {fileID: 9093287421336153567}
+  - component: {fileID: 7682313857806896885}
   m_Layer: 0
   m_Name: RustyNeedle
   m_TagString: Untagged
@@ -127,3 +128,17 @@ CapsuleCollider:
   m_Height: 2.75
   m_Direction: 1
   m_Center: {x: 0, y: 0.65, z: 0}
+--- !u!114 &7682313857806896885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4367024722996220326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abfe2ee7def618843ab72febb3f2f69f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Dmg: 10
+  _pDmg: 10

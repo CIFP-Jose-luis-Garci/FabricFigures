@@ -13,6 +13,7 @@ public class ChController : MonoBehaviour
     InputActions inputActions;
     Animator animator;
     [SerializeField] Collider atColl;
+    PlayerManager pMan;
 
     //Cameras
     [SerializeField] Transform cam;
@@ -241,6 +242,7 @@ public class ChController : MonoBehaviour
         slopeLimit = controller.slopeLimit;
 
         //Assign components
+        pMan = GetComponent<PlayerManager>();
         referenceToAnimation = GetComponent<Animation>();
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
@@ -297,7 +299,13 @@ public class ChController : MonoBehaviour
         //Calling methods
 
         //Movement
-        if (!isStaggered)
+        bool canMove;
+        if (isStaggered || !pMan.alive)
+            canMove = false;
+        else
+            canMove = true;
+
+        if (canMove)
         {
             if (!isAirHold)
             {
@@ -305,7 +313,6 @@ public class ChController : MonoBehaviour
                 Jump();
                 Move();
             }
-
 
             PlungeHit();
         }
