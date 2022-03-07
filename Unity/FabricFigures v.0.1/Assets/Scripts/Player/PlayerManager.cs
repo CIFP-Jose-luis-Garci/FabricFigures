@@ -7,6 +7,8 @@ public class PlayerManager : MonoBehaviour
     //Variables
 
     //Components
+    GameObject audioManagerObj;
+    AudioManager audioManager;
     GameObject initObject;
     InitGameScript initGameScript;
     Animator animator;
@@ -27,6 +29,8 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        audioManagerObj = GameObject.Find("AudioManager");
+        audioManager = audioManagerObj.GetComponent<AudioManager>();
         initObject = GameObject.Find("InitObject");
         initGameScript = initObject.GetComponent<InitGameScript>();
         animator = gameObject.GetComponent<Animator>();

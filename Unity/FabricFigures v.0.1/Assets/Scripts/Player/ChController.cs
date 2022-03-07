@@ -10,6 +10,7 @@ public class ChController : MonoBehaviour
 
     //Components
     public CharacterController controller;
+    [SerializeField] ParticleSystem attackTrail;
     InputActions inputActions;
     Animator animator;
     [SerializeField] Collider atColl;
@@ -658,6 +659,11 @@ public class ChController : MonoBehaviour
     void EndStagger()
     {
         isStaggered = false;
+    }
+
+    void AttackTrailPlay()
+    {
+        attackTrail.Play();
     }
     #endregion
 
