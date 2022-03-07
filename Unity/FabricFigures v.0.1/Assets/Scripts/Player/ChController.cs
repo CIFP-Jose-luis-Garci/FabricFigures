@@ -736,7 +736,7 @@ public class ChController : MonoBehaviour
         return currAim;
     }
 
-    void CameraLockOff()
+    public void CameraLockOff()
     {
         isAim = false;
 

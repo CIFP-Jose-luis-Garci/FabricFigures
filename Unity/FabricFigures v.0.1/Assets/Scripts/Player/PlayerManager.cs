@@ -68,8 +68,8 @@ public class PlayerManager : MonoBehaviour
     {
         alive = false;
         animator.SetTrigger("Death");
-        inputActions.Disable();
         hud.FadeToBlack(true);
+        chController.CameraLockOff();
         Invoke("Restart", 5f);
     }
     void Restart()
