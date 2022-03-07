@@ -63,6 +63,8 @@ public class ChController : MonoBehaviour
     float slopeLimit;
     float slideFriction = 0.3f;
 
+    //Stagger
+    public bool isStaggered = false;
 
 
     //------------------------------------------
@@ -111,6 +113,7 @@ public class ChController : MonoBehaviour
     [SerializeField] List<Transform> aimTargets = new List<Transform>();
     private int currEnemyTarget;
     public bool isAim = false;
+    bool clearFocus;
     [SerializeField] LayerMask targetsLM;
     [SerializeField] GameObject focusParticles;
 
@@ -171,7 +174,7 @@ public class ChController : MonoBehaviour
         {
             ctx.ReadValueAsButton();
 
-            if (canDash)
+            if (canDash && !isStaggered)
             {
                 animator.SetBool("IsDashing", true);
                 direction = new Vector3(dirInputs.x, 0f, dirInputs.y).normalized;
@@ -278,34 +281,38 @@ public class ChController : MonoBehaviour
             Vector3 vectorToTarget = (currAim.position - transform.position);
             vectorToTarget.y = 0f;
             float distToTarget = vectorToTarget.magnitude;
-            print(distToTarget);
             float aimSpeed = baseSpeed * (distToTarget/6f);
 
             if (distToTarget >= 6f)
                 speed = baseSpeed;
-            else if (distToTarget < 6f && aimSpeed > 2f)
+            else if (distToTarget < 6f && aimSpeed >= 3f)
                 speed = aimSpeed;
             else
-                speed = 2f;
+                speed = 3f;
         }
 
         else
             speed = baseSpeed;
 
-        print(speed);
-
         //Calling methods
-        if (!isAirHold)
+
+        //Movement
+        if (!isStaggered)
         {
-            DashCD();
-            Jump();
-            Move();
+            if (!isAirHold)
+            {
+                DashCD();
+                Jump();
+                Move();
+            }
+
+
+            PlungeHit();
         }
-
-        if(slide)
+        if (slide)
             SurfaceSlide();
-
-        PlungeHit();
+        
+        //Camera
         CameraFocusCheck();
         TargetArea();
 
@@ -559,7 +566,7 @@ public class ChController : MonoBehaviour
             turnSmoothTime = 0.6f;
             atColl.enabled = true;
             velocity = Vector3.zero;
-            controller.Move(Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward * 8f * Time.deltaTime);
+            controller.Move(Quaternion.Euler(0f, targetAngle, 0f) * new Vector3(0f, -2f, 8f) * Time.deltaTime);
             yield return null;
         }
     }
@@ -638,6 +645,10 @@ public class ChController : MonoBehaviour
         atColl.enabled = true;
     }
 
+    void EndStagger()
+    {
+        isStaggered = false;
+    }
     #endregion
 
     #region CAMERA
@@ -655,17 +666,25 @@ public class ChController : MonoBehaviour
     void CameraFocusCheck()
     {
         if (isAim)
-            if (Physics.Raycast(aimCam.transform.position, currAim.position - aimCam.transform.position, out hit, layerMask))
+            if (Physics.Raycast(aimCam.transform.position, currAim.position - aimCam.transform.position, out hit))
             {
                 Debug.DrawRay(castOrigin, (currAim.position - aimCam.transform.position).normalized * hit.distance, Color.red);
-                if (hit.collider.gameObject.tag != "Enemy" || hit.distance > 30f)
+                if (hit.collider.gameObject.tag != "Enemy" || hit.collider.gameObject.tag == "Enemy" && hit.distance > 25f)
                 {
-                    print("LockOff, " + hit.collider.gameObject.tag);
-                    CameraLockOff();
+                    clearFocus = false;
+                    Invoke("LockOffCheck", 2f);
                 }
+                else
+                    clearFocus = true;
             }
     }
-
+    void LockOffCheck()
+    {
+        if (!clearFocus)
+            CameraLockOff();
+        else
+            return;
+    }
     void FocusParticles()
     {
         focusParticles.transform.position = currAim.position;
@@ -703,7 +722,6 @@ public class ChController : MonoBehaviour
             }
             else
             {
-                print(curDistance);
                 currAim = null;
             }
         }
