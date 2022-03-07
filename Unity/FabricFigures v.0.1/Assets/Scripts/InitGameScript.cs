@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InitGameScript : MonoBehaviour
 {
@@ -15,9 +16,8 @@ public class InitGameScript : MonoBehaviour
         Physics.IgnoreLayerCollision(6, 9, true);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void LoadScene(int sceneNumber)
     {
-        
+        SceneManager.LoadScene(sceneNumber);
     }
 }

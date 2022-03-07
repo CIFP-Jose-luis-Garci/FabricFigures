@@ -7,6 +7,8 @@ public class PlayerManager : MonoBehaviour
     //Variables
 
     //Components
+    GameObject initObject;
+    InitGameScript initGameScript;
     Animator animator;
     ChController chController;
     HUD hud;
@@ -25,6 +27,8 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        initObject = GameObject.Find("InitObject");
+        initGameScript = initObject.GetComponent<InitGameScript>();
         animator = gameObject.GetComponent<Animator>();
         chController = gameObject.GetComponent<ChController>();
         hud = gameObject.GetComponent<HUD>();
@@ -66,5 +70,10 @@ public class PlayerManager : MonoBehaviour
         animator.SetTrigger("Death");
         inputActions.Disable();
         hud.FadeToBlack(true);
+        Invoke("Restart", 5f);
+    }
+    void Restart()
+    {
+        initGameScript.LoadScene(1);
     }
 }
