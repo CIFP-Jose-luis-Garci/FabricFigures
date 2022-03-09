@@ -250,8 +250,8 @@ public class ChController : MonoBehaviour
         GameObject mainCam = GameObject.FindGameObjectWithTag("MainCamera");
         cam = mainCam.transform;
 
-        tpCam = GameObject.Find("TP cam");
-        aimCam = GameObject.Find("LockOn cam");
+        //tpCam = GameObject.Find("TP cam");
+       // aimCam = GameObject.Find("LockOn cam");
     }
 
 

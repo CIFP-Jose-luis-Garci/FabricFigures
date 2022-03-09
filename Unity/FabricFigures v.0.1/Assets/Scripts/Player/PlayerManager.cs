@@ -7,8 +7,8 @@ public class PlayerManager : MonoBehaviour
     //Variables
 
     //Components
-    GameObject audioManagerObj;
-    AudioManager audioManager;
+    //GameObject audioManagerObj;
+    //AudioManager audioManager;
     GameObject initObject;
     InitGameScript initGameScript;
     Animator animator;
@@ -29,10 +29,10 @@ public class PlayerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        audioManagerObj = GameObject.Find("AudioManager");
-        audioManager = audioManagerObj.GetComponent<AudioManager>();
-        initObject = GameObject.Find("InitObject");
-        initGameScript = initObject.GetComponent<InitGameScript>();
+       // audioManagerObj = GameObject.Find("AudioManager");
+       // audioManager = audioManagerObj.GetComponent<AudioManager>();
+        //initObject = GameObject.Find("InitObject");
+        //initGameScript = initObject.GetComponent<InitGameScript>();
         animator = gameObject.GetComponent<Animator>();
         chController = gameObject.GetComponent<ChController>();
         hud = gameObject.GetComponent<HUD>();
@@ -83,6 +83,6 @@ public class PlayerManager : MonoBehaviour
     }
     void Restart()
     {
-        initGameScript.LoadScene(1);
+        //initGameScript.LoadScene(1);
     }
 }
